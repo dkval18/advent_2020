@@ -27,6 +27,24 @@ def col_finder(code):
 def seat_id(code):
     return row_finder(code) * 8 + col_finder(code)
 
+def find_seat(input):
+    seat_ids = [seat_id(code) for code in input.split()]
+    seat_ids.sort()
+    # print(seat_ids)
+    first = True
+    for id in seat_ids:
+        if first:
+            last_id = id
+            first = False
+            pass
+        check = id - last_id
+        last_id = id
+        if check == 2:
+            return print(id - 1)
+    return print('didnt find one')
+        
+
+
 def highest_seat_id(input):
     seat_ids = [seat_id(code) for code in input.split()]
     return max(seat_ids)
@@ -38,4 +56,4 @@ assert seat_id(test) == 567
 with open('input05.txt') as data:
     inputs = data.read()
 
-print(highest_seat_id(inputs))
+find_seat(inputs)
